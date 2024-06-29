@@ -6,4 +6,4 @@ export const _oscNewWebSocketPort = url => () =>
   });
 
 export const _oscPortOpen = port => () => port.open();
-export const _oscPortSend = port => => msg => () => port.send(msg);
+export const _oscPortSend = port => msg => () => port.send(msg);
