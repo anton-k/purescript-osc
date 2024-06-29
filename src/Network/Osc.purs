@@ -2,6 +2,8 @@ module Network.Osc
   ( Port
   , Osc (..)
   , OscValue (..)
+  , newWebsocketPort
+  , oscToJson
   ) where
 
 import Prelude
