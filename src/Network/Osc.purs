@@ -24,6 +24,7 @@ type Osc =
 
 data OscValue
   = OscFloat Number
+  | OscDouble Number
   | OscInt Int
   | OscBoolean Boolean
   | OscString String
@@ -46,6 +47,7 @@ oscToJson osc =
 oscValueToJson :: OscValue -> JSON
 oscValueToJson = case _ of
   OscFloat val -> oscArgJson "f" (fromNumber val)
+  OscDouble val -> oscArgJson "d" (fromNumber val)
   OscInt val -> oscArgJson "i" (fromInt val)
   OscBoolean val -> oscArgJson "b" (fromBoolean val)
   OscString val -> oscArgJson "s" (fromString val)
