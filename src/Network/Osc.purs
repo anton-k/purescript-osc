@@ -15,6 +15,8 @@ import JSON.Object as JO
 import Data.Tuple (Tuple(..))
 import Data.Maybe (Maybe (..))
 import Data.Traversable (traverse, traverse_)
+import Data.Show.Generic (genericShow)
+import Data.Generic.Rep (class Generic)
 
 type Port =
   { send :: Osc -> Effect Unit
@@ -32,6 +34,13 @@ data OscValue
   | OscInt Int
   | OscBoolean Boolean
   | OscString String
+
+derive instance eqOscValue :: Eq OscValue
+derive instance ordOscValue :: Ord OscValue
+derive instance genericOscValue :: Generic OscValue _
+
+instance showOscValue :: Show OscValue where
+  show = genericShow
 
 newWebsocketPort :: String -> Effect Port
 newWebsocketPort url = do
