@@ -1,7 +1,5 @@
 "use strict";
 
-export const
-
 export const _oscNewWebSocketPort = url => () =>
   new osc.WebSocketPort({ "url": url });
 
