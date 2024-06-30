@@ -78,15 +78,21 @@ oscFromJson json = do
 
 oscValueFromJson :: JSON -> Maybe OscValue
 oscValueFromJson json = do
-  obj <- J.toJObject json
-  ty <- J.toString =<< JO.lookup "type" obj
-  val <- JO.lookup "value" obj
-  case ty of
-    "f" -> OscFloat <$> J.toNumber val
-    "d" -> OscDouble <$> J.toNumber val
-    "i" -> OscInt <$> J.toInt val
-    "b" -> OscBoolean <$> J.toBoolean val
-    _ -> Nothing
+  J.case_
+    onUnit
+    onBoolean
+    onNumber
+    onString
+    onArray
+    onObject
+    json
+    where
+    onUnit = const Nothing
+    onBoolean = Just <<< OscBoolean
+    onNumber = Just <<< OscDouble
+    onString = Just <<< OscString
+    onArray = const Nothing
+    onObject = const Nothing
 
 oscArgJson :: String -> JSON -> JSON
 oscArgJson ty val = J.fromJObject $ JO.fromEntries
