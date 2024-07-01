@@ -12,13 +12,18 @@ to generate this file without the comments in this block.
 -}
 { name = "osc"
 , dependencies = 
-    [ "console"
-    , "effect"
+    [ "effect"
     , "prelude"
     , "json"
     , "tuples" 
     , "foldable-traversable"
     , "maybe"
+    , "strings"
+    , "arrays"
+    , "either"
+    , "spec"
+    , "aff"
+    , "integers"
     ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs", "test/**/*.purs" ]
